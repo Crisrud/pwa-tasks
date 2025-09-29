@@ -382,7 +382,8 @@ function App() {
         setTitle(transcript);
         // Foca no input de título se possível
         setTimeout(() => {
-          const el = document.querySelector('input.input-group');
+          const el = document.querySelector('input.modern-input');
+          console.log("Elemento encontrado para foco:", el);
           if (el) el.focus();
         }, 100);
       },

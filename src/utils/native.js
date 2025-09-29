@@ -51,15 +51,28 @@ export function exportTasksToJson(tasks) {
   export function listenTaskByVoice(onResult, onError) {
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
     if (!SpeechRecognition) {
+      const errorMsg = 'Reconhecimento de voz não suportado neste navegador';
+      console.error(errorMsg);
       onError && onError('Reconhecimento de voz não suportado');
       return null;
     }
+
+    console.log('SpeechRecognition disponível:', SpeechRecognition);
+
     const recognition = new SpeechRecognition();
     recognition.lang = 'pt-BR';
     recognition.interimResults = false;
     recognition.maxAlternatives = 1;
+
+    recognition.onstart = () => {
+        console.log('Reconhecimento de voz iniciado - fale agora');
+      };
+
+
     recognition.onresult = (event) => {
-      const transcript = event.results[0][0].transcript;
+        console.log('Resultado recebido:', event);
+        const transcript = event.results[0][0].transcript;
+        console.log('Texto reconhecido:', transcript);
       onResult(transcript);
     };
     recognition.onerror = (event) => {
