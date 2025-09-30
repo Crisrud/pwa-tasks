@@ -1,10 +1,10 @@
-# 📋 TaskMaster - Sistema de Gestão de Tarefas
+# 📋 Tarefas PWA - Sistema de Gestão de Tarefas
 
 ## 🎓 Projeto de Pós-Graduação em Desenvolvimento Mobile
 
 ### 📖 Descrição do Projeto
 
-O **TaskMaster** é uma aplicação web moderna e robusta para gestão de tarefas pessoais e profissionais, desenvolvida como trabalho de conclusão da pós-graduação em Engenharia de Software. A aplicação demonstra a implementação de conceitos avançados de desenvolvimento web, sincronização de dados e experiência do usuário offline-first.
+O **Tarefas PWA** é uma aplicação web moderna e robusta para gestão de tarefas pessoais e profissionais, desenvolvida como trabalho de conclusão da pós-graduação em Engenharia de Software. A aplicação demonstra a implementação de conceitos avançados de desenvolvimento web, sincronização de dados e experiência do usuário offline-first.
 
 ---
 
