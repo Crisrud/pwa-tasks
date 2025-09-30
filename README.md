@@ -128,7 +128,7 @@ O **TaskMaster** é uma aplicação web moderna e robusta para gestão de tarefa
 ### **Instalação e Execução**
 ```bash
 # Clone o repositório
-git clone https://github.com/seu-usuario/taskmaster.git
+git clone https://github.com/crisrud/pwa-tasks.git
 
 # Instale as dependências
 npm install
