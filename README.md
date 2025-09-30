@@ -1,6 +1,6 @@
 # 📋 TaskMaster - Sistema de Gestão de Tarefas
 
-## 🎓 Projeto de Pós-Graduação em Engenharia de Software
+## 🎓 Projeto de Pós-Graduação em Desenvolvimento Mobile
 
 ### 📖 Descrição do Projeto
 
