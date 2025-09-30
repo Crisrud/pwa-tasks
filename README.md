@@ -132,6 +132,7 @@ git clone https://github.com/crisrud/pwa-tasks.git
 
 # Instale as dependências
 npm install
+npm install vite-plugin-pwa workbox-window --save-dev
 
 # Execute em modo desenvolvimento
 npm run dev
