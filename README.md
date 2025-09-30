@@ -1,4 +1,4 @@
-# 📋 TaskMaster - Sistema Avançado de Gestão de Tarefas
+# 📋 TaskMaster - Sistema de Gestão de Tarefas
 
 ## 🎓 Projeto de Pós-Graduação em Engenharia de Software
 
