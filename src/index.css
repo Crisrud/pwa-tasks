@@ -399,6 +399,7 @@ h1 {
     transition: all 0.3s ease;
     height: 56px;
     margin-top: 10px;
+    
   }
   
   .login-button:hover:not(:disabled) {

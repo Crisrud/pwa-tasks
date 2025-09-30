@@ -32,7 +32,7 @@ export function exportTasksToJson(tasks) {
   }
   
   
-  export async function copyTaskToClipboard(task) {
+  export async function copyTask(task) {
     const text = `Tarefa: ${task.title}\nHora: ${task.hora || ''}\nConcluída: ${task.done ? 'Sim' : 'Não'}${task.location ? `\nLocalização: ${task.location.lat}, ${task.location.lng}` : ''}`;
     if (navigator.clipboard) {
       await navigator.clipboard.writeText(text);
@@ -76,8 +76,22 @@ export function exportTasksToJson(tasks) {
       onResult(transcript);
     };
     recognition.onerror = (event) => {
-      onError && onError(event.error);
+      onError && onError(event.error);  
     };
-    recognition.start();
+    recognition.start();  
     return recognition;
+  } 
+   
+  export async function shareTask(task) {
+    if (!navigator.share) {
+      throw new Error('Web Share API não suportada neste navegador/dispositivo.');
+    }
+    console.log('Compartilhando tarefa:', task);
+    console.log('Tarefa para compartilhar:', task.title);
+    const text = `Tarefa: ${task.title}\nHora: ${task.hora || ''}\nConcluída: ${task.done ? 'Sim' : 'Não'}${task.location ? `\nLocalização: ${task.location.lat}, ${task.location.lng}` : ''}`;
+    const shareData = {
+      title: task.title || 'Tarefa',
+      text,
+    };
+    await navigator.share(shareData);
   }

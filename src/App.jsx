@@ -5,8 +5,10 @@ import { useAuth } from './contexts/AuthContext';
 import { syncTasks  } from './utils/sync';
 import { deleteTaskFromFirebase, getTasksCountFromFirebase } from './utils/firebase';
 import { useNavigate } from 'react-router-dom';
-import { getUserLocation, exportTasksToJson, copyTaskToClipboard, listenTaskByVoice  } from './utils/native';
+import { getUserLocation, exportTasksToJson, copyTask, listenTaskByVoice  } from './utils/native';
 import { getGoogleCalendarUrl } from './utils/calendar';
+import OfflineIndicator from './components/OfflineIndicator';
+import { useRegisterSW } from 'virtual:pwa-register/react';
 
 import './App.css'
 
@@ -21,6 +23,20 @@ function App() {
   const [firebaseTaskCount, setFirebaseTaskCount] = useState(0); // Novo state para contagem
 
   const navigate = useNavigate(); // Adicione esta linha
+
+  // PWA Update Logic
+  const {
+    offlineReady: [offlineReady, setOfflineReady],
+    needRefresh: [needRefresh, setNeedRefresh],
+    updateServiceWorker,
+  } = useRegisterSW({
+    onRegistered(r) {
+      console.log('SW registrado: ' + r)
+    },
+    onRegisterError(error) {
+      console.log('Erro no registro do SW', error)
+    },
+  })
 
 
   async function handleLogout() {
@@ -210,6 +226,7 @@ function App() {
     <div className="modern-container">
       {/* Header */}
       <div className="header">
+        <OfflineIndicator />
       <button onClick={handleDashboard} className="logout-btn">
           <span>📊 Dashboard</span>
         </button>
@@ -317,7 +334,7 @@ function App() {
                     )}
 
                     <div style={{ marginTop: 6, marginBottom: 2 }}>
-                      <button onClick={() => copyTaskToClipboard(task)} style={{ fontSize: '0.9em', background: '#eee', color: '#000', border: 'none', borderRadius: 4, padding: '2px 8px', cursor: 'pointer' }}>Copiar</button>
+                      <button onClick={() => copyTask(task)} style={{ fontSize: '0.9em', background: '#eee', color: '#000', border: 'none', borderRadius: 4, padding: '2px 8px', cursor: 'pointer' }}>Copiar</button>
                     </div>
                     <div style={{ marginBottom: 2 }}>
                       <a

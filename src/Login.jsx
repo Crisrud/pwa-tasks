@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { login } from './utils/firebase';
 import { Link } from 'react-router-dom';
+import OfflineIndicator from "./components/OfflineIndicator"
+import { useOnlineStatus } from './hooks/useOnlineStatus'
 import './index.css';
 
 
@@ -10,6 +12,7 @@ function Login() {
     const [password, setPassword] = useState('');
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
+    const { isOnline } = useOnlineStatus();
 
 
     async function handleLogin(e) {
@@ -33,6 +36,7 @@ function Login() {
 
     return(
         <>
+            <OfflineIndicator />
             <div className="modern-login-container">
                 <div className="login-card">
                 {/* Header */}
@@ -76,7 +80,11 @@ function Login() {
 
                     <button 
                     type="submit" 
-                    disabled={loading} 
+                    disabled={loading || !isOnline} 
+                    style={{
+                        opacity: !isOnline ? 0.6 : 1,
+                        cursor: !isOnline ? 'not-allowed' : 'pointer'
+                     }}
                     className="login-button"
                     >
                     {loading ? (
@@ -96,10 +104,21 @@ function Login() {
                 {/* Footer */}
                 <div className="login-footer">
                     <p className="footer-text">
-                    Não tem uma conta? 
-                    <Link to="/register" className="register-link">
-                        Crie uma conta agora
-                    </Link>
+                    Não tem uma conta? { isOnline ? ( 
+                        <Link to="/register" className="register-link">
+                            Crie uma conta agora
+                        </Link>
+                    ) : (
+                        <span style={{ 
+                            color: '#999', 
+                            cursor: 'not-allowed',
+                            textDecoration: 'line-through' 
+                        }} >
+                            Cadastro não disponível offline
+
+                        </span>
+                    )}
+
                     </p>
                 </div>
                 </div>
